@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:camera/camera.dart';
+import 'package:flutter_better_camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:wakelock/wakelock.dart';
 import 'chart.dart';
@@ -25,6 +25,7 @@ class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
   double _avg; // store the average value during calculation
   DateTime _now; // store the now Datetime
   Timer _timer; // timer for image processing
+  FlashMode flashMode = FlashMode.off;
 
   @override
   void initState() {
@@ -209,7 +210,9 @@ class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
       List _cameras = await availableCameras();
       _controller = CameraController(_cameras.first, ResolutionPreset.low);
       await _controller.initialize();
-
+      Future.delayed(Duration(milliseconds: 100)).then((onValue) {
+        flashMode = FlashMode.alwaysFlash;
+      });
       _controller.startImageStream((CameraImage image) {
         _image = image;
       });
