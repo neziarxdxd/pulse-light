@@ -91,7 +91,7 @@ class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
                                 padding: EdgeInsets.all(4),
                                 child: Text(
                                   _toggled
-                                      ? "Cover both the camera and the flash with your finger"
+                                      ? "Press the heart "
                                       : "Camera feed will display here",
                                   style: TextStyle(
                                       backgroundColor: _toggled
@@ -211,7 +211,9 @@ class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
       _controller = CameraController(_cameras.first, ResolutionPreset.low);
       await _controller.initialize();
       Future.delayed(Duration(milliseconds: 100)).then((onValue) {
+        // ilaw
         flashMode = FlashMode.torch;
+        _controller.setFlashMode(flashMode);
       });
       _controller.startImageStream((CameraImage image) {
         _image = image;
