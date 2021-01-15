@@ -211,7 +211,7 @@ class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
       _controller = CameraController(_cameras.first, ResolutionPreset.low);
       await _controller.initialize();
       Future.delayed(Duration(milliseconds: 100)).then((onValue) {
-        flashMode = FlashMode.alwaysFlash;
+        flashMode = FlashMode.torch;
       });
       _controller.startImageStream((CameraImage image) {
         _image = image;
