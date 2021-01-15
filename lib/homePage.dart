@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter_better_camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:wakelock/wakelock.dart';
@@ -25,7 +26,7 @@ class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
   double _avg; // store the average value during calculation
   DateTime _now; // store the now Datetime
   Timer _timer; // timer for image processing
-  FlashMode flashMode = FlashMode.off;
+  FlashMode flashMode;
 
   @override
   void initState() {
@@ -91,7 +92,7 @@ class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
                                 padding: EdgeInsets.all(4),
                                 child: Text(
                                   _toggled
-                                      ? "Press the heart "
+                                      ? "Cover both the camera and the flash with your finger"
                                       : "Camera feed will display here",
                                   style: TextStyle(
                                       backgroundColor: _toggled
@@ -211,7 +212,6 @@ class HomePageView extends State<HomePage> with SingleTickerProviderStateMixin {
       _controller = CameraController(_cameras.first, ResolutionPreset.low);
       await _controller.initialize();
       Future.delayed(Duration(milliseconds: 100)).then((onValue) {
-        // ilaw
         flashMode = FlashMode.torch;
         _controller.setFlashMode(flashMode);
       });
